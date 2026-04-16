@@ -36,44 +36,43 @@
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="0Harmony">
-            <HintPath>..\..\..\Verweise\0Harmony.dll</HintPath>
+            <HintPath>$(APPDATA)\EXILED\Plugins\dependencies\0Harmony.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp">
-            <HintPath>..\..\..\Verweise\Assembly-CSharp-Publicized.dll</HintPath>
-        </Reference>
-        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-            <HintPath>..\packages\ExMod.Exiled.9.13.1\lib\net48\Assembly-CSharp-Publicized.dll</HintPath>
+            <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Assembly-CSharp.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp-firstpass">
-            <HintPath>..\..\..\Verweise\Assembly-CSharp-firstpass.dll</HintPath>
+            <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
         </Reference>
         <Reference Include="Mirror">
-            <HintPath>..\..\..\Verweise\Mirror.dll</HintPath>
+            <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Mirror.dll</HintPath>
         </Reference>
         <Reference Include="Mirror.Components">
-            <HintPath>..\..\..\Verweise\Mirror.Components.dll</HintPath>
+            <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Mirror.Components.dll</HintPath>
         </Reference>
         <Reference Include="ProjectMER">
-            <HintPath>..\..\..\Verweise\ProjectMER.dll</HintPath>
+            <HintPath>$(APPDATA)\EXILED\Plugins\dependencies\ProjectMER.dll</HintPath>
         </Reference>
         <Reference Include="System"/>
         <Reference Include="System.Core"/>
         <Reference Include="System.Data"/>
         <Reference Include="System.Xml"/>
         <Reference Include="UnityEngine">
-            <HintPath>..\..\..\Verweise\UnityEngine.dll</HintPath>
+            <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.AnimationModule">
-            <HintPath>..\..\..\Verweise\UnityEngine.AnimationModule.dll</HintPath>
+            <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.CoreModule">
-            <HintPath>..\..\..\Verweise\UnityEngine.CoreModule.dll</HintPath>
+            <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.PhysicsModule">
-            <HintPath>..\..\..\Verweise\UnityEngine.PhysicsModule.dll</HintPath>
+            <HintPath>D:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Commands\MysteryBoxLocate.cs"/>
+        <Compile Include="Commands\MysteryBoxSpawn.cs"/>
         <Compile Include="Commands\Points.cs"/>
         <Compile Include="Config.cs"/>
         <Compile Include="Translation.cs"/>
