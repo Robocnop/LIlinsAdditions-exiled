@@ -11,7 +11,6 @@ namespace LilinsAdditions.Main.Items.SCPs;
 public abstract class GogglesItem : CustomItem
 {
     private const float ITEM_CLEAR_DELAY = 0.01f;
-    private const string ALREADY_WEARING_MESSAGE = "You are already wearing something!";
 
     private static readonly Dictionary<int, GogglesItem> EquippedGoggles = new();
 
@@ -28,7 +27,7 @@ public abstract class GogglesItem : CustomItem
         EquippedGoggles.Remove(player.Id);
 
         if (showMessage)
-            player.ShowHint($"You remove the {Name}");
+            player.ShowHint(string.Format(LilinsAdditions.Instance.ActiveTranslation.GogglesRemoved, Name));
 
         Log.Debug($"[GogglesItem] {player.Nickname} removed {Name}");
     }
@@ -41,7 +40,7 @@ public abstract class GogglesItem : CustomItem
         EquippedGoggles[player.Id] = this;
 
         if (showMessage)
-            player.ShowHint($"You put on the {Name}");
+            player.ShowHint(string.Format(LilinsAdditions.Instance.ActiveTranslation.GogglesEquipped, Name));
 
         Log.Debug($"[GogglesItem] {player.Nickname} equipped {Name}");
     }
@@ -112,7 +111,7 @@ public abstract class GogglesItem : CustomItem
         if (EquippedGoggles.ContainsKey(e.Player.Id))
         {
             e.IsAllowed = false;
-            e.Player.ShowHint(ALREADY_WEARING_MESSAGE);
+            e.Player.ShowHint(LilinsAdditions.Instance.ActiveTranslation.GogglesAlreadyWearing);
         }
     }
 

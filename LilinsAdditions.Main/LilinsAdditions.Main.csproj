@@ -76,6 +76,9 @@
     <ItemGroup>
         <Compile Include="Commands\Points.cs"/>
         <Compile Include="Config.cs"/>
+        <Compile Include="Translation.cs"/>
+        <Compile Include="Translations\En.cs"/>
+        <Compile Include="Translations\Fr.cs"/>
         <Compile Include="Features\PointSystem.cs"/>
         <Compile Include="Features\SchematicSpawner.cs"/>
         <Compile Include="Features\WeaponSelector.cs"/>

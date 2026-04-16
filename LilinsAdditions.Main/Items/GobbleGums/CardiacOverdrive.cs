@@ -190,29 +190,29 @@ public class CardiacOverdrive : FortunaFizzItem
 
     private static void ShowEffectAlreadyActiveHint(Player player)
     {
-        player.ShowHint("<color=red>Cardiac Overdrive is already active!</color>", 2);
+        player.ShowHint(LilinsAdditions.Instance.ActiveTranslation.CardiacOverdriveAlreadyActive, 2);
     }
 
     private static void ShowActivationHint(Player player)
     {
-        player.ShowHint($"<color=red>Cardiac Overdrive activated for {EFFECT_DURATION}s!</color>");
+        player.ShowHint(string.Format(LilinsAdditions.Instance.ActiveTranslation.CardiacOverdriveActivated, EFFECT_DURATION));
     }
 
     private void ShowStaminaRegenerationHint(Player player, float elapsed)
     {
         var remainingTime = EFFECT_DURATION - elapsed;
-        player.ShowHint($"<color=red>💔 Using life force! HP: {player.Health:F0} | {remainingTime:F0}s left</color>",
-            2);
+        player.ShowHint(string.Format(LilinsAdditions.Instance.ActiveTranslation.CardiacOverdriveStatus,
+            player.Health.ToString("F0"), remainingTime.ToString("F0")), 2);
     }
 
     private static void ShowInsufficientHealthHint(Player player)
     {
-        player.ShowHint("<color=red>Your heart gave out! Effect ended.</color>");
+        player.ShowHint(LilinsAdditions.Instance.ActiveTranslation.CardiacOverdriveHeartOut);
     }
 
     private static void ShowDeactivationHint(Player player)
     {
-        player.ShowHint("<color=yellow>Cardiac Overdrive effect ended.</color>", 2);
+        player.ShowHint(LilinsAdditions.Instance.ActiveTranslation.CardiacOverdriveEnded, 2);
     }
 
     #endregion

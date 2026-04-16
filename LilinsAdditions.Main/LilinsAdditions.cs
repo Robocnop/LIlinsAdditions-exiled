@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using Exiled.API.Features;
 using Exiled.CustomItems.API.Features;
 using Exiled.CustomRoles.API.Features;
 using HarmonyLib;
 using LilinsAdditions.Main.Features;
 using LilinsAdditions.Main.Handlers;
+using LilinsAdditions.Translations;
 using MEC;
 using ProjectMER.Events.Handlers;
 using Map = Exiled.Events.Handlers.Map;
@@ -13,8 +15,14 @@ using Server = Exiled.Events.Handlers.Server;
 
 namespace LilinsAdditions;
 
-public class LilinsAdditions : Plugin<Config>
+public class LilinsAdditions : Plugin<Config, Translation>
 {
+    private static readonly Dictionary<string, Translation> BundledTranslations = new()
+    {
+        { "en", En.Instance },
+        { "fr", Fr.Instance },
+    };
+
     // Harmony and Coroutines
     private Harmony _harmony;
 
@@ -27,6 +35,13 @@ public class LilinsAdditions : Plugin<Config>
 
     // Singleton Instance
     public static LilinsAdditions Instance { get; private set; }
+
+    /// <summary>
+    /// Returns the bundled translation matching <see cref="Config.Language"/>,
+    /// or falls back to English if the language key is not found.
+    /// </summary>
+    public Translation ActiveTranslation =>
+        BundledTranslations.TryGetValue(Config.Language.ToLower(), out var t) ? t : En.Instance;
 
     // Handlers
     public PlayerHandler PlayerHandler { get; private set; }

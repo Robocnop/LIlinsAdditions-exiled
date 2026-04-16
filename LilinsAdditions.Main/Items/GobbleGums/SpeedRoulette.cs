@@ -57,15 +57,17 @@ public class SpeedRoulette : FortunaFizzItem
         var netModifier = GetOrInitializeNetModifier(ev.Player);
         var isPositive = Random.Range(0, 2) == 0;
 
+        var t = LilinsAdditions.Instance.ActiveTranslation;
+
         if (isPositive)
         {
             netModifier += SpeedBoostAmount;
-            ev.Player.ShowHint($"⚡ SPEED BOOST! (+{SpeedBoostAmount}% speed.", 5f);
+            ev.Player.ShowHint(string.Format(t.SpeedRouletteBoost, SpeedBoostAmount), 5f);
         }
         else
         {
             netModifier -= SlownessBoostAmount;
-            ev.Player.ShowHint($"🐌 SLOWED DOWN! (-{SlownessBoostAmount}% speed.", 5f);
+            ev.Player.ShowHint(string.Format(t.SpeedRouletteSlow, SlownessBoostAmount), 5f);
         }
 
         ev.Player.SessionVariables[SPEED_MODIFIER_KEY] = netModifier;

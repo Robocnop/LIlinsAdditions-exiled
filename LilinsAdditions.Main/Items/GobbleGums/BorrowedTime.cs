@@ -61,7 +61,7 @@ public class BorrowedTime : FortunaFizzItem
             return;
 
         _storedDamage[ev.Player] = 0f;
-        ev.Player.ShowHint("Borrowed Time activated! Damage stored for 10s.");
+        ev.Player.ShowHint(LilinsAdditions.Instance.ActiveTranslation.BorrowedTimeActivated);
         ev.Item?.Destroy();
 
         Timing.CallDelayed(EffectDuration, () => EndBorrowedTime(ev.Player));
@@ -88,14 +88,16 @@ public class BorrowedTime : FortunaFizzItem
 
         var finalDamage = totalDamage / 2f;
 
+        var t = LilinsAdditions.Instance.ActiveTranslation;
+
         if (finalDamage > ExplosionThreshold)
         {
-            player.ShowHint("The borrowed time has run out... explosively!");
+            player.ShowHint(t.BorrowedTimeExplosion);
             SpawnExplosion(player);
         }
         else
         {
-            player.ShowHint($"Borrowed Time ended! Taking {finalDamage:F0} damage.");
+            player.ShowHint(string.Format(t.BorrowedTimeEnded, finalDamage.ToString("F0")));
             player.Hurt(finalDamage);
         }
 

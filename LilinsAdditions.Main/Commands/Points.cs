@@ -1,5 +1,4 @@
-﻿using System;
-using CommandSystem;
+﻿using CommandSystem;
 using Exiled.API.Features;
 using LilinsAdditions.Main.Features;
 
@@ -10,18 +9,18 @@ public class Points : ICommand
 {
     private const int MinimumArgumentCount = 2;
     private const int ArgumentCountWithAmount = 3;
-    private const string UsageMessage = "Usage: points (get|add|set|remove) <player> [amount]";
-    private const string InvalidActionMessage = "Not a valid action. Use: get, add, set, remove";
-    private const string InvalidAmountMessage = "Please enter a valid amount.";
+
     public string Command => "points";
     public string[] Aliases => new[] { "pts" };
     public string Description => "Manages points for a selected player (add/set/remove/get)";
+
+    private static Translation T => LilinsAdditions.Instance.ActiveTranslation;
 
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         if (arguments.Count < MinimumArgumentCount)
         {
-            response = UsageMessage;
+            response = T.PointsUsage;
             return false;
         }
 
@@ -30,20 +29,20 @@ public class Points : ICommand
 
         if (!TryGetPlayer(playerName, out var player))
         {
-            response = $"Player '{playerName}' not found.";
+            response = string.Format(T.PointsPlayerNotFound, playerName);
             return false;
         }
 
         return ExecuteAction(action, player, arguments, out response);
     }
 
-    private bool TryGetPlayer(string playerName, out Player player)
+    private static bool TryGetPlayer(string playerName, out Player player)
     {
         player = Player.Get(playerName);
         return player != null;
     }
 
-    private bool ExecuteAction(string action, Player player, ArraySegment<string> arguments, out string response)
+    private static bool ExecuteAction(string action, Player player, ArraySegment<string> arguments, out string response)
     {
         switch (action)
         {
@@ -56,24 +55,24 @@ public class Points : ICommand
                 return HandlePointsModification(action, player, arguments, out response);
 
             default:
-                response = InvalidActionMessage;
+                response = T.PointsInvalidAction;
                 return false;
         }
     }
 
-    private bool HandleGetPoints(Player player, out string response)
+    private static bool HandleGetPoints(Player player, out string response)
     {
         var currentPoints = PointSystem.GetPoints(player);
-        response = $"Player {player.Nickname} has {currentPoints} points.";
+        response = string.Format(T.PointsGet, player.Nickname, currentPoints);
         return true;
     }
 
-    private bool HandlePointsModification(string action, Player player, ArraySegment<string> arguments,
+    private static bool HandlePointsModification(string action, Player player, ArraySegment<string> arguments,
         out string response)
     {
         if (!TryParseAmount(arguments, out var amount))
         {
-            response = InvalidAmountMessage;
+            response = T.PointsInvalidAmount;
             return false;
         }
 
@@ -81,28 +80,28 @@ public class Points : ICommand
         {
             case "add":
                 PointSystem.AddPoints(player, amount);
-                response = $"Added {amount} points to {player.Nickname}.";
+                response = string.Format(T.PointsAdded, amount, player.Nickname);
                 break;
 
             case "set":
                 PointSystem.SetPoints(player, amount);
-                response = $"Set {player.Nickname}'s points to {amount}.";
+                response = string.Format(T.PointsSet, player.Nickname, amount);
                 break;
 
             case "remove":
                 PointSystem.RemovePoints(player, amount);
-                response = $"Removed {amount} points from {player.Nickname}.";
+                response = string.Format(T.PointsRemoved, amount, player.Nickname);
                 break;
 
             default:
-                response = InvalidActionMessage;
+                response = T.PointsInvalidAction;
                 return false;
         }
 
         return true;
     }
 
-    private bool TryParseAmount(ArraySegment<string> arguments, out int amount)
+    private static bool TryParseAmount(ArraySegment<string> arguments, out int amount)
     {
         amount = 0;
         return arguments.Count >= ArgumentCountWithAmount && int.TryParse(arguments.At(2), out amount);

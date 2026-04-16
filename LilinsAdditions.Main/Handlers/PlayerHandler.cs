@@ -173,7 +173,7 @@ public class PlayerHandler
         var safeRoom = GetRandomSafeHeavyRoom();
         if (safeRoom == null)
         {
-            Log.Warn("[AntiSCPSuicide] No sfe room found!");
+            Log.Warn("[AntiSCPSuicide] No safe room found!");
             return;
         }
 
